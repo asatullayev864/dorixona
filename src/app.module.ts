@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { MedicineType } from './medicine-type/models/medicine-type.model';
 import { MedicinesModule } from './medicines/medicines.module';
+import { Medicine } from './medicines/models/medicine.model';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { MedicinesModule } from './medicines/medicines.module';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      models: [MedicineType],
+      models: [MedicineType, Medicine],
       autoLoadModels: true,
       logging: false,
       sync: { alter: true },

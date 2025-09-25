@@ -1,10 +1,11 @@
-import { AutoIncrement, Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Medicine } from "../../medicines/models/medicine.model";
 
 interface IMedicineTypeAttr{
     name: string;
 }
 
-@Table({ tableName: "MedicineType" })
+@Table({ tableName: "medicineType" })
 export class MedicineType extends Model<MedicineType, IMedicineTypeAttr>{
     @Column({
         type: DataType.INTEGER,
@@ -18,4 +19,7 @@ export class MedicineType extends Model<MedicineType, IMedicineTypeAttr>{
         allowNull: false 
     })
     declare name: string
+
+    @HasMany(() => Medicine)
+    medicine: Medicine[];
 }
