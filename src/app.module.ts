@@ -5,6 +5,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { MedicineType } from './medicine-type/models/medicine-type.model';
 import { MedicinesModule } from './medicines/medicines.module';
 import { Medicine } from './medicines/models/medicine.model';
+import { RegionModule } from './region/region.module';
+import { Region } from './region/models/region.model';
+import { DistrictModule } from './district/district.module';
+import { District } from './district/models/district.model';
 
 @Module({
   imports: [
@@ -19,15 +23,17 @@ import { Medicine } from './medicines/models/medicine.model';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      models: [MedicineType, Medicine],
+      models: [MedicineType, Medicine, Region, District],
       autoLoadModels: true,
       logging: false,
       sync: { alter: true },
     }),
     MedicineTypeModule,
-    MedicinesModule
+    MedicinesModule,
+    RegionModule,
+    DistrictModule
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

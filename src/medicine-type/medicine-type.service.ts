@@ -11,6 +11,10 @@ export class MedicineTypeService {
   ) { }
 
   async create(createMedicineTypeDto: CreateMedicineTypeDto) {
+    const { name } = createMedicineTypeDto;
+    if (!name) {
+      throw new NotFoundException("Nameni kiriting!!!");
+    }
     return await this.medicineTypeModel.create(createMedicineTypeDto);
   }
 
