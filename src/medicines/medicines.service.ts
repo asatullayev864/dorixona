@@ -14,7 +14,7 @@ export class MedicinesService {
   async create(createMedicineDto: CreateMedicineDto) {
     const { name, manufacture, medicine_type_id, price, expiry_date, info } = createMedicineDto;
     if (!name || !manufacture || !medicine_type_id || !price || !expiry_date) {
-      throw new BadRequestException("Please enter the full information‼️");
+      throw new BadRequestException("Please enter the full information❗️");
     }
     return await this.medicineModel.create(createMedicineDto);
   }
