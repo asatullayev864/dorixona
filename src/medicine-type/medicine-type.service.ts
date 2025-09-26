@@ -23,7 +23,11 @@ export class MedicineTypeService {
   }
 
   async findOne(id: number) {
-    const medicineType = await this.medicineTypeModel.findByPk(id);
+    const medicineType = await this.medicineTypeModel.findOne({
+      where: { id },
+      include: { all: true },
+      order: [["id", "ASC"]]
+    });
     if (!medicineType) {
       throw new NotFoundException(`MedicineType with ID ${id} not found`);
     }

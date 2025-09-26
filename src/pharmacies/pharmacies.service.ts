@@ -38,7 +38,11 @@ export class PharmaciesService {
   }
 
   async findOne(id: number): Promise<Pharmacy | null> {
-    return await this.pharmaciesModel.findByPk(id, { include: { all: true } });
+    return await this.pharmaciesModel.findOne({
+      where: { id },
+      include: { all: true },
+      order: [["id", "ASC"]]
+    });
   }
 
   async update(id: number, updatePharmacyDto: UpdatePharmacyDto) {

@@ -23,7 +23,11 @@ export class RegionService {
   }
 
   async findOne(id: number) {
-    const region = await this.regionModel.findByPk(id);
+    const region = await this.regionModel.findOne({
+      where: { id },
+      include: { all: true },
+      order: [["id", "ASC"]]
+    });
     if (!region) {
       throw new NotFoundException(`Region with ID ${id} not found`);
     }

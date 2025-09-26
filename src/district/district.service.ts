@@ -28,8 +28,10 @@ export class DistrictService {
   }
 
   async findOne(id: number) {
-    const district = await this.districtModel.findByPk(id, {
-      include: [{ model: Region }],
+    const district = await this.districtModel.findOne({
+      where: { id },
+      include: { all: true },
+      order: [["id", "ASC"]]
     });
 
     if (!district) {
