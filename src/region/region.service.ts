@@ -32,15 +32,19 @@ export class RegionService {
 
   async update(id: number, updateRegionDto: UpdateRegionDto) {
     const region = await this.findOne(id);
-    return await region.update(updateRegionDto);
+    return await this.regionModel.update(updateRegionDto,{
+        where: { id },
+        returning: true
+      }
+    );
   }
 
   async remove(id: number) {
-    const region = await this.findOne(id);
+    const region = await this.regionModel.findOne({where: {id}});
     if (!region) {
       throw new NotFoundException("Unable to find information in such ID");
     }
-    await region.destroy();
+    await this.regionModel;
     return { message: `Region with ID ${id} removed successfully` };
   }
 }

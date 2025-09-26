@@ -64,13 +64,14 @@ export class PharmaciesService {
     });
   }
 
-  async remove(id: number): Promise<{ message: string }> {
-    const pharmacy = await this.pharmaciesModel.findByPk(id);
+  async remove(id: number) {
+    const pharmacy = await this.pharmaciesModel.destroy({ where: { id } });
     if (!pharmacy) {
-      throw new NotFoundException("Bunday dorixona topilmadi❗️");
+      throw new NotFoundException("Bunday ID da Pharmacy topilmadi❌");
     }
-
-    await pharmacy.destroy();
-    return { message: "Dorixona muvaffaqiyatli o'chirildi ✅" };
+    return {
+      message: "Pharmacy muvaffaqiyatli o'chirildi✅",
+      id
+    };
   }
 }
