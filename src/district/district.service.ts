@@ -24,9 +24,7 @@ export class DistrictService {
   }
 
   async findAll() {
-    return await this.districtModel.findAll({
-      include: [{ model: Region }],
-    });
+    return await this.districtModel.findAll({ include: { all: true }, order: [["id", "ASC"]] });
   }
 
   async findOne(id: number) {

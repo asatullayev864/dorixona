@@ -9,6 +9,7 @@ import { MedicineType } from '../medicine-type/models/medicine-type.model';
 export class MedicinesService {
   constructor(
     @InjectModel(Medicine) private readonly medicineModel: typeof Medicine,
+    @InjectModel(MedicineType) private readonly medicineTypeModel: typeof MedicineType,
   ) { }
 
   async create(createMedicineDto: CreateMedicineDto) {
@@ -16,13 +17,17 @@ export class MedicinesService {
     if (!name || !manufacture || !medicine_type_id || !price || !expiry_date) {
       throw new BadRequestException("Please enter the full information❗️");
     }
+
+    const medicineType = await this.medicineTypeModel.findByPk(medicine_type_id)
+    if (!medicineType) {
+      throw new NotFoundException("Bunday medicineType mavjud emas")
+    }
+
     return await this.medicineModel.create(createMedicineDto);
   }
 
   async findAll() {
-    return await this.medicineModel.findAll({
-      include: { model: MedicineType },
-    });
+    return await this.medicineModel.findAll({ include: { all: true }, order: [["id", "ASC"]] });
   }
 
   async findOne(id: number) {

@@ -19,7 +19,7 @@ export class MedicineTypeService {
   }
 
   async findAll() {
-    return await this.medicineTypeModel.findAll();
+    return await this.medicineTypeModel.findAll({ include: { all: true }, order: [["id", "ASC"]] });
   }
 
   async findOne(id: number) {

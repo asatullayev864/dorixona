@@ -9,6 +9,10 @@ import { RegionModule } from './region/region.module';
 import { Region } from './region/models/region.model';
 import { DistrictModule } from './district/district.module';
 import { District } from './district/models/district.model';
+import { PharmaciesModule } from './pharmacies/pharmacies.module';
+import { StockModule } from './stock/stock.module';
+import { Stock } from './stock/models/stock.model';
+import { Pharmacy } from './pharmacies/models/pharmacy.model';
 
 @Module({
   imports: [
@@ -23,7 +27,7 @@ import { District } from './district/models/district.model';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      models: [MedicineType, Medicine, Region, District],
+      models: [MedicineType, Medicine, Region, District,Pharmacy, Stock],
       autoLoadModels: true,
       logging: false,
       sync: { alter: true },
@@ -31,7 +35,9 @@ import { District } from './district/models/district.model';
     MedicineTypeModule,
     MedicinesModule,
     RegionModule,
-    DistrictModule
+    DistrictModule,
+    PharmaciesModule,
+    StockModule
   ],
   controllers: [],
   providers: [],

@@ -19,7 +19,7 @@ export class RegionService {
   }
 
   async findAll() {
-    return await this.regionModel.findAll();
+    return await this.regionModel.findAll({ include: { all: true }, order: [["id", "ASC"]] });
   }
 
   async findOne(id: number) {
